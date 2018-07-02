@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eking.activemq.dao.FlightInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.eking.activemq.pojo.FlightInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sche_date" property="scheDate" jdbcType="TIMESTAMP" />
+    <result column="flight_no" property="flightNo" jdbcType="VARCHAR" />
+    <result column="carrier_flight_no" property="carrierFlightNo" jdbcType="VARCHAR" />
+    <result column="flight_from" property="flightFrom" jdbcType="VARCHAR" />
+    <result column="flight_to" property="flightTo" jdbcType="VARCHAR" />
+    <result column="stops" property="stops" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="sche_time" property="scheTime" jdbcType="TIMESTAMP" />
+    <result column="flight_status" property="flightStatus" jdbcType="VARCHAR" />
+    <result column="data_source" property="dataSource" jdbcType="VARCHAR" />
+    <result column="record_status" property="recordStatus" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_person" property="createPerson" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_person" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="is_manual_edit" property="isManualEdit" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from flight_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.eking.activemq.pojo.FlightInfo" >
+    insert into flight_info (id, sche_date, flight_no, 
+      carrier_flight_no, flight_from, flight_to, 
+      stops, model, sche_time, 
+      flight_status, data_source, record_status, 
+      create_time, create_person, update_time, 
+      update_person, is_manual_edit)
+    values (#{id,jdbcType=INTEGER}, #{scheDate,jdbcType=TIMESTAMP}, #{flightNo,jdbcType=VARCHAR}, 
+      #{carrierFlightNo,jdbcType=VARCHAR}, #{flightFrom,jdbcType=VARCHAR}, #{flightTo,jdbcType=VARCHAR}, 
+      #{stops,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{scheTime,jdbcType=TIMESTAMP}, 
+      #{flightStatus,jdbcType=VARCHAR}, #{dataSource,jdbcType=VARCHAR}, #{recordStatus,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updatePerson,jdbcType=VARCHAR}, #{isManualEdit,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.eking.activemq.pojo.FlightInfo" >
+    update flight_info
+    set sche_date = #{scheDate,jdbcType=TIMESTAMP},
+      flight_no = #{flightNo,jdbcType=VARCHAR},
+      carrier_flight_no = #{carrierFlightNo,jdbcType=VARCHAR},
+      flight_from = #{flightFrom,jdbcType=VARCHAR},
+      flight_to = #{flightTo,jdbcType=VARCHAR},
+      stops = #{stops,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      sche_time = #{scheTime,jdbcType=TIMESTAMP},
+      flight_status = #{flightStatus,jdbcType=VARCHAR},
+      data_source = #{dataSource,jdbcType=VARCHAR},
+      record_status = #{recordStatus,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_person = #{createPerson,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_person = #{updatePerson,jdbcType=VARCHAR},
+      is_manual_edit = #{isManualEdit,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, sche_date, flight_no, carrier_flight_no, flight_from, flight_to, stops, 
+    model, sche_time, flight_status, data_source, record_status, create_time, create_person, 
+    update_time, update_person, is_manual_edit
+    from flight_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, sche_date, flight_no, carrier_flight_no, flight_from, flight_to, stops, 
+    model, sche_time, flight_status, data_source, record_status, create_time, create_person, 
+    update_time, update_person, is_manual_edit
+    from flight_info
+  </select>
+</mapper>
