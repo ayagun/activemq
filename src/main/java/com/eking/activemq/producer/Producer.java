@@ -21,22 +21,39 @@ public class Producer {
     private JmsMessagingTemplate jmsMessagingTemplate;
 
 
-    @Scheduled(fixedDelay = 3000,initialDelay = 3000)
+    @Scheduled(fixedDelay = 50,initialDelay = 50)
     public void send() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         String msg = dateFormat.format(new Date());
-        //Destination topic = new ActiveMQTopic("topic://mytest.topic1,queue://mytest.queue1");
-        //Destination queue = new ActiveMQQueue("topic://mytest.topic2,queue://mytest.queue2");
-        Destination virtualTopic = new ActiveMQTopic("VirtualTopic.test");
-        System.out.println("发送消息:"+ msg);
-        //this.jmsMessagingTemplate.convertAndSend(queue, msg);
-        //this.jmsMessagingTemplate.convertAndSend(topic, msg);
-        this.jmsMessagingTemplate.convertAndSend(virtualTopic, msg);
+        try{
+            //Destination topicqueue1 = new ActiveMQTopic("topic://mytest.topic1,queue://mytest.queue1");
+            //Destination topicqueue2 = new ActiveMQQueue("queue://mytest.queue2,topic://mytest.topic2");
+            //Destination virtualTopic = new ActiveMQTopic("VirtualTopic.test");
+            //Destination queue1 = new ActiveMQQueue("mytest.queue1");
+            //Destination queue2 = new ActiveMQQueue("mytest.queue2");
+            //Destination queue3 = new ActiveMQQueue("mytest.queue3");
+            Destination topic1 = new ActiveMQTopic("mytest.topic1");
+            //Destination topic11 = new ActiveMQTopic("IN.FSS2.FIDS");
+            //Destination topic2 = new ActiveMQTopic("mytest.topic2");
+            System.out.println("发送消息:"+ msg);
+            //this.jmsMessagingTemplate.convertAndSend(queue1, msg);
+            //this.jmsMessagingTemplate.convertAndSend(queue2, msg);
+            //this.jmsMessagingTemplate.convertAndSend(queue3, msg);
+            //this.jmsMessagingTemplate.convertAndSend(topicqueue1, msg);
+            this.jmsMessagingTemplate.convertAndSend(topic1, msg);
+            this.jmsMessagingTemplate.convertAndSend(topic1, msg);
+            //this.jmsMessagingTemplate.convertAndSend(topic11, msg);
+            //this.jmsMessagingTemplate.convertAndSend(topic2, msg);
+            //this.jmsMessagingTemplate.convertAndSend(virtualTopic, msg);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
     }
 
-/*    @JmsListener(destination="out.queue")
+   /* @JmsListener(destination="out.queue1", containerFactory="queueListenerFactory")
     public void consumerQueueMessage(String text){
-        System.out.println("从out.queue队列收到的回复报文为:"+text);
+        System.out.println("从out.queue1队列收到的回复报文为:"+text);
     }
     @JmsListener(destination="out.topic", containerFactory="topicListenerFactory")
     public void consumerTopicMessage(String text){
