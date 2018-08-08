@@ -4,5 +4,3 @@
 * @Date：Created in 2018/8/8 9:42
 * @Modified By：
 */
-
-# activemq add
